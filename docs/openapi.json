@@ -1,0 +1,60 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Vapor SaaS Billing Engine",
+    "version": "1.0.0",
+    "description": "Swift + Vapor billing engine for subscription lifecycle, proration, dunning, and webhook idempotency."
+  },
+  "paths": {
+    "/api/dashboard/summary": {
+      "get": {
+        "summary": "Billing summary",
+        "responses": {
+          "200": {
+            "description": "Billing posture summary"
+          }
+        }
+      }
+    },
+    "/api/subscriptions": {
+      "get": {
+        "summary": "Subscription inventory",
+        "responses": {
+          "200": {
+            "description": "Current subscription list"
+          }
+        }
+      }
+    },
+    "/api/invoices": {
+      "get": {
+        "summary": "Invoice lane",
+        "responses": {
+          "200": {
+            "description": "Invoice and proration posture"
+          }
+        }
+      }
+    },
+    "/api/webhooks": {
+      "get": {
+        "summary": "Webhook history",
+        "responses": {
+          "200": {
+            "description": "Processed webhook events"
+          }
+        }
+      }
+    },
+    "/api/webhooks/stripe": {
+      "post": {
+        "summary": "Simulate Stripe webhook delivery",
+        "responses": {
+          "202": {
+            "description": "Webhook processed or suppressed via idempotency"
+          }
+        }
+      }
+    }
+  }
+}

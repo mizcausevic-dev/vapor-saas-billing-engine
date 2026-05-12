@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Overview</title>
+  <style>
+    :root{--bg:#07111c;--panel:#142235;--line:rgba(101,140,198,.24);--text:#eef4ff;--muted:#a1b7d7;--accent:#82c8ff;--gold:#f2e2c0}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,sans-serif;color:var(--text);background:radial-gradient(circle at top left,rgba(70,110,180,.24),transparent 28%),linear-gradient(180deg,#06101a,#091523)}
+    main{width:min(1460px,calc(100% - 40px));margin:20px auto;padding:22px;border:1px solid var(--line);border-radius:30px;background:linear-gradient(180deg,rgba(11,18,30,.96),rgba(8,14,25,.98))}
+    .topbar,.hero,.metric,.panel,.card{border:1px solid var(--line);border-radius:28px;background:linear-gradient(180deg,rgba(20,32,50,.92),rgba(13,22,37,.96))}
+    .topbar{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:12px 14px;margin-bottom:18px}
+    .brand{color:var(--accent);letter-spacing:.28em;text-transform:uppercase;font-size:12px;font-weight:700}.lane{color:var(--muted);letter-spacing:.16em;text-transform:uppercase;font-size:12px;margin-left:14px}
+    .status,.nav{display:flex;gap:10px;flex-wrap:wrap}.chip,.nav a{padding:9px 13px;border-radius:999px;border:1px solid rgba(101,140,198,.2);background:rgba(20,34,53,.82);color:var(--text);text-decoration:none;font-size:13px;font-weight:600}.nav a.active{color:var(--accent);background:rgba(130,200,255,.12)}
+    .hero{display:grid;grid-template-columns:1.45fr .95fr;gap:18px;padding:28px;margin-bottom:20px}.eyebrow{color:var(--accent);letter-spacing:.28em;text-transform:uppercase;font-size:12px;font-weight:700}
+    h1,h2,h3{margin:12px 0 14px;font-family:Georgia,serif;color:var(--gold);letter-spacing:-.05em}h1{font-size:68px;line-height:.92}h2{font-size:44px;line-height:1.02}h3{font-size:30px;line-height:1.04}
+    p{color:var(--muted);line-height:1.55}.lede{font-size:22px;max-width:880px}.metrics,.grid-2,.grid-3{display:grid;gap:18px}.metrics{grid-template-columns:repeat(4,1fr);margin-bottom:20px}.grid-2{grid-template-columns:1.06fr .94fr}.grid-3{grid-template-columns:repeat(3,1fr)}
+    .metric,.panel,.card{padding:22px}.metric strong{display:block;margin:14px 0 10px;font-family:Georgia,serif;font-size:52px;line-height:.95;color:var(--gold)}.metric-label{font-size:12px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase}.card-title{font-family:Georgia,serif;color:var(--gold);font-size:28px;line-height:1.04;margin:10px 0}.tag{display:inline-block;padding:9px 13px;border-radius:999px;border:1px solid rgba(101,140,198,.2);background:rgba(20,34,53,.82);color:var(--accent);font-size:12px;font-weight:700}
+  </style>
+</head>
+<body>
+  <main>
+    <section class="topbar"><div><span class="brand">VAPOR SAAS BILLING ENGINE</span><span class="lane">OVERVIEW LANE</span></div><div class="status"><span class="chip">MRR $14,330</span><span class="chip">Dunning 1</span><span class="chip">Webhook events 3</span></div></section>
+    <section class="hero">
+      <article>
+        <p class="eyebrow">Subscription economics</p>
+        <h1>Subscription lifecycle, proration, and dunning all live in one operator-grade billing lane.</h1>
+        <p class="lede">This Swift + Vapor service models the painful parts of SaaS billing that real operators actually care about: plan changes, preview math, payment-failure recovery, and webhook idempotency that prevents duplicate state transitions.</p>
+      </article>
+      <article>
+        <div class="nav"><a class="active">Overview</a><a>Lifecycle board</a><a>Webhook proof</a><a>Docs</a></div>
+        <p class="eyebrow">Lead recommendation</p>
+        <h3>Stabilize the dunning lane for Lattice Harbor before the retry posture becomes involuntary churn.</h3>
+        <p>The revenue risk in this sample set is not missing invoices. It is recovery discipline around past-due enterprise accounts and making sure webhook replays do not double-apply billing changes.</p>
+      </article>
+    </section>
+    <section class="metrics">
+      <article class="metric"><div class="metric-label">Active subscriptions</div><strong>1</strong><p>Accounts already recognized as live revenue.</p></article>
+      <article class="metric"><div class="metric-label">Review accounts</div><strong>2</strong><p>Accounts needing human attention because of trial, downgrade, or payment posture.</p></article>
+      <article class="metric"><div class="metric-label">Monthly recurring revenue</div><strong>$14,330</strong><p>Current MRR across the sample book.</p></article>
+      <article class="metric"><div class="metric-label">Dunning accounts</div><strong>1</strong><p>Accounts actively sitting in payment recovery.</p></article>
+    </section>
+    <section class="grid-2">
+      <article class="panel">
+        <p class="eyebrow">Account posture</p>
+        <h2>Which accounts are driving the billing story.</h2>
+        <div class="grid-3">
+          <article class="card"><span class="tag">active</span><div class="card-title">Northstar Workspace</div><p>Plan enterprise · annual billing · 320 seats.</p><p>renewal=2026-07-01 · payment_method=healthy</p></article>
+          <article class="card"><span class="tag">past_due</span><div class="card-title">Lattice Harbor</div><p>Plan platform · monthly billing · 118 seats.</p><p>renewal=2026-05-29 · payment_method=retrying</p></article>
+          <article class="card"><span class="tag">trialing</span><div class="card-title">Cedar Lane Health</div><p>Plan growth · monthly billing · 44 seats.</p><p>renewal=2026-05-20 · payment_method=healthy</p></article>
+        </div>
+      </article>
+      <article class="panel">
+        <p class="eyebrow">Lead invoice</p>
+        <h2>Route into dunning lane with high-touch recovery before plan suspension.</h2>
+        <p>inv_2202 is the best proof of why this repo matters: proration math, retry pressure, and clear operator actions all need to live together in one billing control surface.</p>
+        <div class="nav"><a>retrying state</a><a>attempts 3</a><a>delta $0</a></div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

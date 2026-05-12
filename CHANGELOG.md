@@ -12,7 +12,8 @@ This log is intentionally written as an engineering record rather than a launch 
 - Tightened the repo story around the real-world operating problem: billing ambiguity, attribution lag, usage-metering gaps, and forecast drift.
 
 ### Why this mattered
-- Existing approaches in CRM reporting, billing tools, product analytics, and spreadsheet forecasting were useful, but they answered isolated questions, but not the full operational story from acquisition through monetization and retention.
+- Existing approaches in CRM reporting, billing tools, product analytics, and spreadsheet forecasting were useful for adjacent workflows.
+- They still missed the core need: a coherent operating layer from acquisition through monetization, usage, and retention.
 - This release made the repo readable as an operational capability rather than a narrow technical demo.
 
 ## [0.1.0] - 2026-01-14

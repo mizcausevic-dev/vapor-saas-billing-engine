@@ -27,7 +27,7 @@ Swift Vapor billing engine for subscription lifecycle, proration, dunning, and w
 ## Local run
 
 ```powershell
-Set-Location "C:\Users\chaus\dev\repos\vapor-saas-billing-engine"
+cd vapor-saas-billing-engine
 swift run
 ```
 

@@ -4,11 +4,13 @@ import PackageDescription
 
 let package = Package(
     name: "VaporSaaSBillingEngine",
-    // Vapor 4.x requires macOS 10.15+; without an explicit platform pin
-    // SPM defaults the executable to macOS 10.13, producing
-    // "executable 'App' requires macos 10.13, but depends on the product
-    // 'Vapor' which requires macos 10.15" on every CI run.
-    platforms: [.macOS(.v13)],
+    // CI runs on macos-15-arm64 with Swift 6.0.3. The transitive
+    // async-http-client requires macOS 13+ for Network.framework
+    // (NWPOSIXError). `.v13` was being normalized to macOS 10.13 in the
+    // build (SPM 6.0 quirk with the executable target's platform floor);
+    // using a string version explicitly avoids the macOS-13-vs-10.13
+    // enum aliasing.
+    platforms: [.macOS("13.0")],
     products: [
         .executable(name: "vapor-saas-billing-engine", targets: ["App"])
     ],

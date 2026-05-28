@@ -13,7 +13,11 @@ jobs:
       - uses: swift-actions/setup-swift@v2
         with:
           swift-version: "6.0"
+      # Build/test in release config: Swift 6.0.3 has a known debug-info
+      # compiler crash on Darwin.POSIXErrorCode while compiling the transitive
+      # async-http-client. The round-trip debug-types assertion only fires in
+      # debug builds, so release config bypasses it.
       - name: Build
-        run: swift build
+        run: swift build -c release
       - name: Test
-        run: swift test
+        run: swift test -c release

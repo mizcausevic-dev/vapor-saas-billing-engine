@@ -13,11 +13,13 @@ jobs:
       - uses: swift-actions/setup-swift@v2
         with:
           swift-version: "6.0"
-      # Build/test in release config: Swift 6.0.3 has a known debug-info
-      # compiler crash on Darwin.POSIXErrorCode while compiling the transitive
-      # async-http-client. The round-trip debug-types assertion only fires in
-      # debug builds, so release config bypasses it.
+      # Workaround for a Swift 6.0.3 compiler crash on Darwin.POSIXErrorCode
+      # when compiling the transitive async-http-client dep. The compiler
+      # itself suggests this flag in the crash message:
+      # "Pass '-Xfrontend -disable-round-trip-debug-types' to disable this
+      # assertion." -Xswiftc routes the flag through SwiftPM to swiftc; the
+      # paired -Xfrontend then forwards it to swift-frontend.
       - name: Build
-        run: swift build -c release
+        run: swift build -Xswiftc -Xfrontend -Xswiftc -disable-round-trip-debug-types
       - name: Test
-        run: swift test -c release
+        run: swift test -Xswiftc -Xfrontend -Xswiftc -disable-round-trip-debug-types

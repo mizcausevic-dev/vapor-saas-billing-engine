@@ -13,7 +13,13 @@ jobs:
       - uses: swift-actions/setup-swift@v2
         with:
           swift-version: "6.0"
+      # Workaround for a Swift 6.0.3 compiler crash on Darwin.POSIXErrorCode
+      # when compiling the transitive async-http-client dep. The compiler
+      # itself suggests this flag in the crash message:
+      # "Pass '-Xfrontend -disable-round-trip-debug-types' to disable this
+      # assertion." -Xswiftc routes the flag through SwiftPM to swiftc; the
+      # paired -Xfrontend then forwards it to swift-frontend.
       - name: Build
-        run: swift build
+        run: swift build -Xswiftc -Xfrontend -Xswiftc -disable-round-trip-debug-types
       - name: Test
-        run: swift test
+        run: swift test -Xswiftc -Xfrontend -Xswiftc -disable-round-trip-debug-types
